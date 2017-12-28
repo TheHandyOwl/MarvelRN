@@ -27,6 +27,7 @@ export default class App extends Component {
             component={ CharactersList }
             title={ 'Characters List' }
             navigationBarStyle={ styles.navBar }
+            navBarButtonColor={ Colors.navBarText }
           />
           <Scene
             //initial
@@ -34,6 +35,7 @@ export default class App extends Component {
             component={ CharacterDetail }
             title={ 'Character Detail' }
             navigationBarStyle={ styles.navBar }
+            navBarButtonColor={ Colors.navBarText }
           />
           <Scene
             //initial
@@ -41,6 +43,7 @@ export default class App extends Component {
             component={ CharacterNew }
             title={ 'Character New' }
             navigationBarStyle={ styles.navBar }
+            navBarButtonColor={ Colors.navBarText }
           />
         </Scene>
       </Router>
