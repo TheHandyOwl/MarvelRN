@@ -4,6 +4,7 @@ import { Router, Scene } from 'react-native-router-flux'
 
 // My modules
 import { Colors } from 'MarvelRN/src/commons'
+import { webservices } from 'MarvelRN/src/webservices';
 
 // Views
 import CharactersList from 'MarvelRN/src/sections/characters/CharactersList'
@@ -14,6 +15,7 @@ import CharacterNew from 'MarvelRN/src/sections/characters/CharacterNew'
 export default class App extends Component {
 
   componentWillMount() {
+    webservices.configureAxios()
     StatusBar.setBarStyle('light-content') // iOS StatusBar light style
   }
 
