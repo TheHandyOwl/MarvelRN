@@ -4,6 +4,8 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 // My modules
 import { AsyncCalls, Colors } from 'MarvelRN/src/commons'
 
+// My Views
+import CharactersCell from './CharactersCell'
 
 export default class CharactersList extends Component {
 
@@ -29,18 +31,9 @@ export default class CharactersList extends Component {
 
     renderItem(item, index) {
         return (
-            <View style={{
-                        height: 100,
-                        backgroundColor: Colors.colorTerciario,
-                        marginVertical: 10
-                    }}>
-                <Text>{'Index:'}.- {item.id}</Text>
-                <Text>{'Name'}.- {item.name}</Text>
-                <Text>{'Thumbnail'}.- {
-                        item.thumbnail.path + '.' + item.thumbnail.extension
-                    }
-                </Text>
-            </View>
+            <CharactersCell
+                item={item}
+            />
         )
     }
 
