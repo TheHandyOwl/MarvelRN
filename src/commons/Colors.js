@@ -1,6 +1,7 @@
-export const colorPrimario = 'rgb(255, 0, 0)'
-export const colorSecundario = 'rgb(255, 76, 76)'
-export const colorTerciario = 'rgb(127, 38, 38)'
+export const colorPrimario = 'rgb(118, 25, 113)'
+export const colorSecundario = 'rgb(180, 70, 176)'
+export const colorTerciario = 'rgb(218, 176, 217)'
+export const colorCuaternario = 'rgb(254, 245, 222)'
 
 export const black = 'black'
 export const blue = 'blue'
@@ -12,6 +13,7 @@ export const yellow = 'yellow'
 export const white = 'white'
 
 export const navBar = colorPrimario
-export const background = colorSecundario
+export const navBarText = colorCuaternario
+export const background = colorCuaternario
 export const whiteShadowBG = 'rgba(255,255,255,0.2)'
 export const blackShadowBG = 'rgba(0,0,0,0.2)'
