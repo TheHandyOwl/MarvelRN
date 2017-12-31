@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 // My modules
 import { AsyncCalls, Colors } from 'MarvelRN/src/commons'
@@ -29,10 +30,17 @@ export default class CharactersList extends Component {
             })
     }
 
+    onSelectItem(character) {
+        console.log("Pulsaron id:", character.id, "-", character.name)
+        Actions.CharacterDetail( { title: character.name } )
+
+    }
+
     renderItem(item, index) {
         return (
             <CharactersCell
                 item={item}
+                onSelectItem={ (character) => this.onSelectItem(character) }
             />
         )
     }
