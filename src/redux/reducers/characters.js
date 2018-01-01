@@ -2,7 +2,7 @@ import * as types from '../types/characters'
 
 const initialState = {
         item: null,
-        list: {},
+        list: [],
         isFetching: null,
 }
 
