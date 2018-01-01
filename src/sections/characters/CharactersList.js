@@ -8,7 +8,10 @@ import { AsyncCalls, Colors } from 'MarvelRN/src/commons'
 // My Views
 import CharactersCell from './CharactersCell'
 
-export default class CharactersList extends Component {
+// Redux
+import { connect } from 'react-redux'
+
+class CharactersList extends Component {
 
     constructor(props) {
         super(props)
@@ -64,6 +67,8 @@ export default class CharactersList extends Component {
     }
 
 }
+
+export default connect (null, null) (CharactersList)
 
 const styles = StyleSheet.create({
     
