@@ -15,5 +15,6 @@ export const white = 'white'
 export const navBar = colorPrimario
 export const navBarText = colorCuaternario
 export const background = colorCuaternario
+export const sectionListTitleBackground = colorSecundario
 export const whiteShadowBG = 'rgba(255,255,255,0.2)'
 export const blackShadowBG = 'rgba(0,0,0,0.2)'
