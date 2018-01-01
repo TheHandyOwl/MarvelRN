@@ -8,6 +8,13 @@ function updateCharactersList (value) {
     }
 }
 
+export function updateSelectedCharacter (value) {
+    return {
+        type: types.CHARACTERS_UPDATE_CHARACTER,
+        value
+    }
+}
+
 export function fetchCharactersList () {
     return (dispatch, getState) => {
         AsyncCalls.fetchCharactersList()

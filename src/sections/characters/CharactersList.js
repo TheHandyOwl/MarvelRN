@@ -20,6 +20,7 @@ class CharactersList extends Component {
 
     onSelectItem(character) {
         console.log("Pulsaron id:", character.id, "-", character.name)
+        this.props.updateSelectedCharacter(character)
         Actions.CharacterDetail( { title: character.name } )
 
     }
@@ -56,6 +57,7 @@ class CharactersList extends Component {
 const mapStateToProps = (state) => {
     return {
         list: state.characters.list,
+        character: state.characters.item,
     }
 }
 
@@ -63,7 +65,10 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchCharactersList: () => {
             dispatch(CharactersActions.fetchCharactersList())
-        }
+        },
+        updateSelectedCharacter: (character) => {
+            dispatch(CharactersActions.updateSelectedCharacter(character))
+        },
     }
 }
 

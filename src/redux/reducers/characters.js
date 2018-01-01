@@ -15,6 +15,11 @@ export default function reducer( state = initialState, action = {} ) {
                 ...state,
                 list: action.value,
             }
+        case types.CHARACTERS_UPDATE_CHARACTER:
+            return {
+                ...state,
+                item: action.value,
+            }
         default:
             return state
 

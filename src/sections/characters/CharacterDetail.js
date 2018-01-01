@@ -3,17 +3,31 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { Colors } from 'MarvelRN/src/commons'
 
-export default class CharacterDetail extends Component {
+// Redux
+import { connect } from 'react-redux'
+
+class CharacterDetail extends Component {
 
     render() {
+        console.log("props:", this.props)
+        const { character } = this.props
+        const name = character ? character.name : ''
         return(
             <View style={ styles.container }>
-                <Text>{this.props.title}</Text>
+                <Text>Nombre: {name}</Text>
             </View>
         )
     }
 
 }
+
+const mapStateToProps = (state) => {
+    return {
+        character: state.characters.item,
+    }
+}
+
+export default connect (mapStateToProps, null) (CharacterDetail)
 
 const styles = StyleSheet.create({
 
