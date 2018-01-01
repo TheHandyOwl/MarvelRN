@@ -11,6 +11,22 @@ import CharactersList from 'MarvelRN/src/sections/characters/CharactersList'
 import CharacterDetail from 'MarvelRN/src/sections/characters/CharacterDetail'
 import CharacterNew from 'MarvelRN/src/sections/characters/CharacterNew'
 
+
+/*************** REDUX ***************/
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { Provider, connect } from 'react-redux'
+import thunk from 'redux-thunk'
+
+import * as reducers from 'MarvelRN/src/redux/reducers' // Nuestros reducers
+
+const reducer = combineReducers(reducers) // Combinamos reducers si tenemos más de 1
+const store = createStore ( // Creamos el store con:
+  reducer,                  // - Nuestros reducer
+  applyMiddleware(thunk)    // - Nuestro middleware
+)
+/*************************************/
+
+
 // Component
 export default class App extends Component {
 
@@ -21,34 +37,36 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Scene key='root'>
-          <Scene
-            initial
-            key={ 'CharactersList' }
-            component={ CharactersList }
-            title={ 'Characters List' }
-            navigationBarStyle={ styles.navBar }
-            navBarButtonColor={ Colors.navBarText }
-          />
-          <Scene
-            //initial
-            key={ 'CharacterDetail' }
-            component={ CharacterDetail }
-            title={ 'Character Detail' }
-            navigationBarStyle={ styles.navBar }
-            navBarButtonColor={ Colors.navBarText }
-          />
-          <Scene
-            //initial
-            key={ 'CharacterNew' }
-            component={ CharacterNew }
-            title={ 'Character New' }
-            navigationBarStyle={ styles.navBar }
-            navBarButtonColor={ Colors.navBarText }
-          />
-        </Scene>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Scene key='root'>
+            <Scene
+              initial
+              key={ 'CharactersList' }
+              component={ CharactersList }
+              title={ 'Characters List' }
+              navigationBarStyle={ styles.navBar }
+              navBarButtonColor={ Colors.navBarText }
+            />
+            <Scene
+              //initial
+              key={ 'CharacterDetail' }
+              component={ CharacterDetail }
+              title={ 'Character Detail' }
+              navigationBarStyle={ styles.navBar }
+              navBarButtonColor={ Colors.navBarText }
+            />
+            <Scene
+              //initial
+              key={ 'CharacterNew' }
+              component={ CharacterNew }
+              title={ 'Character New' }
+              navigationBarStyle={ styles.navBar }
+              navBarButtonColor={ Colors.navBarText }
+            />
+          </Scene>
+        </Router>
+      </Provider>
     );
   }
 

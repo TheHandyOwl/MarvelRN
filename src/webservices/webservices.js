@@ -20,6 +20,7 @@ export function fetch(url) {
                 }
             })
             .catch( (error) => {
+                console.log("webservice axios get error:", error)
                 reject ( error )
             })
         })
