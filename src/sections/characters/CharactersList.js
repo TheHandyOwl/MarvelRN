@@ -3,31 +3,19 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 // My modules
-import { AsyncCalls, Colors } from 'MarvelRN/src/commons'
+import { Colors } from 'MarvelRN/src/commons'
 
 // My Views
 import CharactersCell from './CharactersCell'
 
-export default class CharactersList extends Component {
+// Redux
+import { connect } from 'react-redux'
+import * as CharactersActions from 'MarvelRN/src/redux/actions/characters'
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            list: [],
-        }
-    }
+class CharactersList extends Component {
 
     componentWillMount() {
-        AsyncCalls.fetchCharacters()
-            .then( response => {
-                console.log("fetchCharacters fetch response: ", response)
-                this.setState( { list: response.data.results } )
-            })
-            .catch( error => {
-                console.log("fetchCharacters fetch error:", error)
-                this.setState( { list: [] } )
-            })
+        this.props.fetchCharactersList()
     }
 
     onSelectItem(character) {
@@ -51,10 +39,10 @@ export default class CharactersList extends Component {
                 style={ styles.container }
             >
                 <FlatList
-                    data        = {this.state.list}
+                    data        = {this.props.list}
                     renderItem  = { ( { item, index } ) => this.renderItem(item, index) }
                     // Para forzar el repintado en el FlatList
-                    extraData   = {this.state}
+                    extraData   = {this.props}
                     // Esto quita uno de los warning
                     keyExtractor= { (item, index) => item.id }
                 />
@@ -64,6 +52,22 @@ export default class CharactersList extends Component {
     }
 
 }
+
+const mapStateToProps = (state) => {
+    return {
+        list: state.characters.list,
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchCharactersList: () => {
+            dispatch(CharactersActions.fetchCharactersList())
+        }
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (CharactersList)
 
 const styles = StyleSheet.create({
     
