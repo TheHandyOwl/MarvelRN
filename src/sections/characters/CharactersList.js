@@ -68,7 +68,14 @@ class CharactersList extends Component {
 
 }
 
-export default connect (null, null) (CharactersList)
+const mapStateToProps = (state) => {
+        console.log("state:", state)
+        return {
+        list: state.characters.list,
+    }
+}
+
+export default connect (mapStateToProps, null) (CharactersList)
 
 const styles = StyleSheet.create({
     
