@@ -65,10 +65,7 @@ function gimmeTheCharacter(data) {
         id: Number(fecha),
         name: data.name,
         description: "New Hero from React Native",
-        thumbnail: {
-            extension: "jpg",
-            path: "https://news.marvel.com/wp-content/uploads/2016/09/561ecde9dfbf6-1"
-        },
+        thumbnail: data.thumbnail,
         comics: {available: 0, items: []},
         series: {available: 0, items: []},
         stories: {available: 0, items: []},

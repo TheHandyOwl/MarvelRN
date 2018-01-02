@@ -11,7 +11,6 @@ export default class CharactersCell extends Component {
     }
 
     render () {
-        console.log("item:", item)
         const item      = this.props && this.props.item ? this.props.item : {}
         const name      = item && item.name ? item.name : ''
         const image     = item && item.thumbnail.path && item.thumbnail.extension ?

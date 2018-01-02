@@ -17,6 +17,7 @@ class CharacterNew extends Component {
             name        : '',
             nameError   : '',
             image       : null,
+            imageError   : '',
         }
 
     }
@@ -30,20 +31,30 @@ class CharacterNew extends Component {
             errors.name = 'Choose a valid name'
             valid = false
         }
+
+        if (!this.state.thumbnail) {
+            errors.image = 'Choose a valid image'
+            valid = false
+        }
         
         this.setState({
             nameError: errors.name ? errors.name : '',
+            imageError: errors.image ? errors.image : '',
         })
 
         return valid
 
     }
 
-    onSelectImageTapped(image) {
-        console.log("Choose an image")
+    onSelectImageTapped() {
         this.setState({
-            image: image
-        });
+            thumbnail: {
+                extension: "jpg",
+                path: "https://news.marvel.com/wp-content/uploads/2016/09/561ecde9dfbf6-1"
+            },
+            imageError: ''
+        })
+
     }
 
     onSubmit() {
@@ -51,7 +62,7 @@ class CharacterNew extends Component {
         if (this.validateForm()) {
             const characterData = {
                 name: this.state.name,
-                image: this.state.image ? 'data:image/jpeg;base64,' + this.state.image.data : null,
+                thumbnail: this.state.thumbnail,
             }
 
             this.props.postCharacter(characterData)
@@ -59,7 +70,8 @@ class CharacterNew extends Component {
     }
 
     render() {
-        const image = this.state.image ? this.state.image : null
+        const image = this.state.thumbnail ? { uri: this.state.thumbnail.path + '.' + this.state.thumbnail.extension } : null
+        const thumbnail = this.state.thumbnail ? this.state.thumbnail : null
         const imageButtonText = this.state.image ?
             this.state.image.fileName : 'Choose image'
         return(
@@ -73,10 +85,11 @@ class CharacterNew extends Component {
                     />
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={ () => this.onSelectImageTapped(image) }
+                        onPress={ () => this.onSelectImageTapped() }
                     >
                         <Text style={styles.textButton}>{imageButtonText}</Text>
                     </TouchableOpacity>
+                    <Text style={styles.imageError}>{ this.state.imageError }</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -84,7 +97,10 @@ class CharacterNew extends Component {
                         inputStyle={styles.input}
                         labelStyle={styles.label}
                         errorStyle={styles.inputError}
-                        onChangeText    = { (v) => this.setState( { name: v } )}
+                        onChangeText    = { (v) => this.setState({
+                            name: v,
+                            nameError: '',
+                        })}
                         value           = { this.state.name }
                         error           = { this.state.nameError }
                         label           = { 'Name:' }
@@ -143,6 +159,12 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0
+    },
+
+    imageError: {
+        color: Colors.labelInput,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
     },
 
     inputContainer: {
