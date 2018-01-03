@@ -19,10 +19,8 @@ class CharactersList extends Component {
     }
 
     onSelectItem(character) {
-        console.log("Pulsaron id:", character.id, "-", character.name)
         this.props.updateSelectedCharacter(character)
         Actions.CharacterDetail( { title: character.name } )
-
     }
 
     renderItem(item, index) {

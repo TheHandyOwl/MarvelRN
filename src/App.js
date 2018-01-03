@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import { Router, Scene } from 'react-native-router-flux'
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Actions, Router, Scene } from 'react-native-router-flux'
 
 // My modules
 import { Colors } from 'MarvelRN/src/commons'
@@ -35,6 +35,18 @@ export default class App extends Component {
     StatusBar.setBarStyle('light-content') // iOS StatusBar light style
   }
 
+  renderAddCharacterButton() {
+    return (
+      <TouchableOpacity style={styles.addButton}>
+        <Text
+          style={styles.addButtonText}
+          onPress={ () => Actions.CharacterNew() }>
+          {'Add character'}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -47,6 +59,7 @@ export default class App extends Component {
               title={ 'Characters List' }
               navigationBarStyle={ styles.navBar }
               navBarButtonColor={ Colors.navBarText }
+              renderRightButton={ () => this.renderAddCharacterButton() }
             />
             <Scene
               //initial
@@ -76,6 +89,18 @@ const styles = StyleSheet.create({
 
   navBar: {
     backgroundColor: Colors.navBar,
+  },
+
+  addButtonText: {
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  addButton: {
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
 });
