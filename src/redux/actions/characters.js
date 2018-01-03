@@ -10,6 +10,14 @@ function updateCharactersList(list, total) {
     }
 }
 
+function setCharactersFetching(value) {
+    console.log("Fetching:", value)
+    return {
+        type: types.CHARACTERS_SET_FETCHING,
+        value,
+    }
+}
+
 function setStep(value) { 
     return {
         type: types.CHARACTERS_SET_LIST_STEP,
@@ -48,6 +56,8 @@ export function fetchInitCharactersList () {
 export function fetchCharactersListOffset () {
     return (dispatch, getState) => {
 
+        dispatch(setCharactersFetching(true))
+
         const state = getState()
         const offset = state.characters.offset
         const limit = state.characters.step
@@ -60,12 +70,14 @@ export function fetchCharactersListOffset () {
 
         AsyncCalls.fetchCharactersListOffset(filters)
         .then( response => {
+            dispatch(setCharactersFetching(false))
             console.log("fetchCharactersListOffset fetch response: ", response)
             const newList = [ ...oldList, ...response.data.results]
             console.log("newList:", newList)
             dispatch(updateCharactersList(newList, response.data.total))
         })
         .catch( error => {
+            dispatch(setCharactersFetching(false))
             console.log("fetchCharactersListOffset fetch error:", error)
             dispatch(updateCharactersList([]))
         })

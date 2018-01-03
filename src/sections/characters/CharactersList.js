@@ -75,6 +75,7 @@ const mapStateToProps = (state) => {
         offset: state.characters.offset,
         step: state.characters.step,
         character: state.characters.item,
+        isFetching: state.characters.isFetching,
     }
 }
 
