@@ -2,11 +2,25 @@ import * as types from '../types/characters'
 import { AsyncCalls } from 'MarvelRN/src/commons'
 import { Actions } from 'react-native-router-flux'
 
-function updateCharactersList (value) {
-    console.log("New list:", value)
+function updateCharactersList(list, total) { 
     return {
         type: types.CHARACTERS_UPDATE_LIST,
-        value
+        list,
+        total,
+    }
+}
+
+function setStep(value) { 
+    return {
+        type: types.CHARACTERS_SET_LIST_STEP,
+        value,
+    }
+}
+
+export function updateCharactersListOffset(value) { 
+    return {
+        type: types.CHARACTERS_UPDATE_LIST_OFFSET,
+        value,
     }
 }
 
@@ -17,6 +31,50 @@ export function updateSelectedCharacter (value) {
     }
 }
 
+export function fetchInitCharactersList () {
+    return (dispatch, getState) => {
+        // Reset characters list and set total to 0
+        dispatch(updateCharactersList([],0))
+        // Set offset to 0
+        dispatch(updateCharactersListOffset(0))
+        // Set step to 20
+        dispatch(setStep(20))
+        // Fetch list
+        dispatch(fetchCharactersListOffset())
+    }
+}
+
+// New fetch with offset
+export function fetchCharactersListOffset () {
+    return (dispatch, getState) => {
+
+        const state = getState()
+        const offset = state.characters.offset
+        const limit = state.characters.step
+        const oldList = state.characters.list
+
+        const filters = {
+            offset: offset,
+            limit: limit,
+        }
+
+        AsyncCalls.fetchCharactersListOffset(filters)
+        .then( response => {
+            console.log("fetchCharactersListOffset fetch response: ", response)
+            const newList = [ ...oldList, ...response.data.results]
+            console.log("newList:", newList)
+            dispatch(updateCharactersList(newList, response.data.total))
+        })
+        .catch( error => {
+            console.log("fetchCharactersListOffset fetch error:", error)
+            dispatch(updateCharactersList([]))
+        })
+
+    }
+}
+
+// Old fetch without offset
+/*
 export function fetchCharactersList () {
     return (dispatch, getState) => {
         AsyncCalls.fetchCharactersList()
@@ -30,6 +88,7 @@ export function fetchCharactersList () {
         })
     }
 }
+*/
 
 export function deleteCharacter (deleteCharacterWithId) {
 
