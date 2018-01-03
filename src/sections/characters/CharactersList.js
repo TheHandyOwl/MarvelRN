@@ -41,7 +41,7 @@ class CharactersList extends Component {
 
     onEndReached() {
         console.log("ON END REACHED")
-        if (this.props.list.length < this.props.total) {
+        if (this.props.list.length < this.props.total && !this.props.isFetching) {
             let newOffset = this.props.offset + this.props.step
             this.props.fetchCharactersListOffset(newOffset)
         }
