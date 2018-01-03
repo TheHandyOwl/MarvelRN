@@ -198,4 +198,8 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
 
+    textButton: {
+        color: Colors.darkTextButton,
+    },
+
 })

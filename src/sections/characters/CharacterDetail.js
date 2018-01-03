@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { Alert, Image, SectionList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 import { Colors } from 'MarvelRN/src/commons'
+import { Button } from 'MarvelRN/src/widgets'
 
 // Redux
 import { connect } from 'react-redux'
+import * as CharactersActions from 'MarvelRN/src/redux/actions/characters'
 
 class CharacterDetail extends Component {
 
@@ -23,8 +25,14 @@ class CharacterDetail extends Component {
           */
     }
 
+    onDelete(id) {
+        console.log("Item to delete:", id)
+        this.props.deleteCharacter(id)
+    }
+
     render() {
         const { character } = this.props
+        const id        = character ? character.id : ''
         const name      = character ? character.name : ''
         const image     = character &&
                 character.thumbnail.path &&
@@ -56,10 +64,18 @@ class CharacterDetail extends Component {
 
         return(
             <View style={ styles.container }>
-                <Image
-                    style   = { styles.image }
-                    source  = { image }
-                />
+                <View style={styles.imageContainer}>
+                    <Image
+                        style   = { styles.image }
+                        source  = { image }
+                    />
+                    <Button
+                        containerStyle={styles.buttonContainer}
+                        labelStyle={styles.textButton}
+                        label={'Borrar'}
+                        onPress={ () => this.onDelete(id) }
+                    />
+                </View>
                 <SectionList
                     sections={[
                         {title: comics, data: comicsList},
@@ -82,7 +98,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect (mapStateToProps, null) (CharacterDetail)
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        deleteCharacter: (id) => {
+            dispatch(CharactersActions.deleteCharacter(id))
+        },
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (CharacterDetail)
 
 const styles = StyleSheet.create({
 
@@ -91,9 +115,28 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.background,
     },
 
+    imageContainer: {
+        backgroundColor: Colors.colorTerciario,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     image: {
         width: '100%',
         height: 350,
+    },
+
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 0,
+        margin: 20,
+        borderWidth: 1,
+        borderRadius: 6,
+        backgroundColor: Colors.colorTerciarioTransparente,
+    },
+
+    textButton: {
+        color: Colors.darkTextButton,
     },
 
     sectionHeader: {

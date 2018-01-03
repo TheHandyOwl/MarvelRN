@@ -31,6 +31,18 @@ export function fetchCharactersList () {
     }
 }
 
+export function deleteCharacter (deleteCharacterWithId) {
+
+    return (dispatch, getState) => {
+        const state = getState()
+        const oldList = state.characters.list
+        const newList = oldList.filter( item => item.id !== deleteCharacterWithId )
+
+        dispatch(updateCharactersList(newList))
+        Actions.pop()
+    }
+}
+
 export function postCharacter (data) {
 
     // Only name will be saved
