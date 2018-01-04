@@ -8,6 +8,5 @@ export function fetchCharactersList() {
 
 export function fetchCharactersListOffset(filters) {
     const fetchUrl = '/characters?' + qs.stringify(filters) + '&apikey=' + constants.API_KEY
-    console.log("fetchUrl:", fetchUrl)
     return webservices.fetch(fetchUrl)
 }
