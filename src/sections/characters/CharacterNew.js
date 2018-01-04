@@ -113,6 +113,8 @@ class CharacterNew extends Component {
                         containerStyle={styles.buttonContainer}
                         label={'Guardar'}
                         onPress={ () => this.onSubmit() }
+                        isFetching={this.props.isFetching}
+                        spinnerColor={Colors.darkBackground}
                     />
                 </View>
             </View>
@@ -124,6 +126,7 @@ class CharacterNew extends Component {
 const mapStateToProps = (state) => {
     return {
         character: state.characters.item,
+        isFetching: state.characters.isFetching,
     }
 }
 
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: '100%',
         height: 200,
-        backgroundColor: Colors.colorTerciario,
+        backgroundColor: Colors.lightBackground,
         alignItems: 'center',
         justifyContent: 'center',
     },
