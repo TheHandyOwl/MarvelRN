@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-
+import Spinner from 'react-native-spinkit'
 // My modules
 import { Colors } from 'MarvelRN/src/commons'
 
@@ -39,6 +39,20 @@ class CharactersList extends Component {
         )
     }
 
+    renderFooter () {
+        console.log("Mostramos spinner con animating = true (o no)")
+        return (
+            <View style={styles.spinnerContainer}>
+                <Spinner
+                    isVisible={this.props.isFetching}
+                    size={50}
+                    type={'FadingCircleAlt'}
+                    color={Colors.darkBackground}
+                />
+                </View>
+        )
+    }
+
     onEndReached() {
         console.log("ON END REACHED")
         if (this.props.list.length < this.props.total && !this.props.isFetching) {
@@ -53,13 +67,14 @@ class CharactersList extends Component {
                 style={ styles.container }
             >
                 <FlatList
-                    data        = {this.props.list}
-                    renderItem  = { ( { item, index } ) => this.renderItem(item, index) }
-                    onEndReached = { () => this.onEndReached() }
+                    data                = {this.props.list}
+                    renderItem          = { ( { item, index } ) => this.renderItem(item, index) }
+                    onEndReached        = { () => this.onEndReached() }
+                    ListFooterComponent = { () => this.renderFooter() }
                     // Para forzar el repintado en el FlatList
-                    extraData   = {this.props}
+                    extraData           = {this.props}
                     // Esto quita uno de los warning
-                    keyExtractor= { (item, index) => item.id }
+                    keyExtractor        = { (item, index) => item.id }
                 />
 
             </View>
@@ -107,5 +122,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.background,
     },
+
+    spinnerContainer: {
+        backgroundColor: Colors.lightBackground,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 50,
+    }
 
 })
