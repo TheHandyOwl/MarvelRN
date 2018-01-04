@@ -40,7 +40,6 @@ class CharactersList extends Component {
     }
 
     renderFooter () {
-        console.log("Mostramos spinner con animating = true (o no)")
         return (
             <View style={styles.spinnerContainer}>
                 <Spinner
@@ -54,7 +53,6 @@ class CharactersList extends Component {
     }
 
     onEndReached() {
-        console.log("ON END REACHED")
         if (this.props.list.length < this.props.total && !this.props.isFetching) {
             let newOffset = this.props.offset + this.props.step
             this.props.fetchCharactersListOffset(newOffset)

@@ -11,7 +11,7 @@ import * as CharactersActions from 'MarvelRN/src/redux/actions/characters'
 class CharacterDetail extends Component {
 
     onSectionListItemSelected(item) {
-        console.log("Sorry but Alert makes simulator lazy -> Info to display:", item.name)
+        console.log("Sorry but Alert component makes simulator lazy -> Info to display:", item.name)
         // Sorry for that, but the simulator works very slowly when an alert is displayed
         /*
         Alert.alert(
@@ -26,7 +26,6 @@ class CharacterDetail extends Component {
     }
 
     onDelete(id) {
-        console.log("Item to delete:", id)
         this.props.deleteCharacter(id)
     }
 

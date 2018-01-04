@@ -11,7 +11,6 @@ function updateCharactersList(list, total) {
 }
 
 function setCharactersFetching(value) {
-    console.log("Fetching:", value)
     return {
         type: types.CHARACTERS_SET_FETCHING,
         value,
@@ -73,7 +72,6 @@ export function fetchCharactersListOffset () {
             dispatch(setCharactersFetching(false))
             console.log("fetchCharactersListOffset fetch response: ", response)
             const newList = [ ...oldList, ...response.data.results]
-            console.log("newList:", newList)
             dispatch(updateCharactersList(newList, response.data.total))
         })
         .catch( error => {
@@ -109,7 +107,7 @@ export function deleteCharacter (deleteCharacterWithId) {
         const oldList = state.characters.list
         const newList = oldList.filter( item => item.id !== deleteCharacterWithId )
 
-        dispatch(updateCharactersList(newList))
+        dispatch(updateCharactersList(newList, state.characters.total))
         Actions.pop()
     }
 }
@@ -123,9 +121,9 @@ export function postCharacter (data) {
    return (dispatch, getState) => {
         const state = getState()
         const oldList = state.characters.list
-        const newList = newCharacter.concat(oldList)
+        const newList = [...newCharacter, ...oldList]
 
-        dispatch(updateCharactersList(newList))
+        dispatch(updateCharactersList(newList, state.characters.total))
         Actions.pop()
     }
 }
