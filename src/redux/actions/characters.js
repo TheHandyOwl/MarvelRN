@@ -103,12 +103,17 @@ export function fetchCharactersList () {
 export function deleteCharacter (deleteCharacterWithId) {
 
     return (dispatch, getState) => {
+        dispatch(setCharactersFetching(true))
+
         const state = getState()
         const oldList = state.characters.list
         const newList = oldList.filter( item => item.id !== deleteCharacterWithId )
 
         dispatch(updateCharactersList(newList, state.characters.total))
-        Actions.pop()
+        setTimeout( () => {
+            dispatch(setCharactersFetching(false))
+            Actions.pop()
+        }, 1000 )
     }
 }
 
@@ -118,13 +123,18 @@ export function postCharacter (data) {
     // Image will be lost, only for react-native-image-picker testing
     const newCharacter = gimmeTheCharacter(data)
 
-   return (dispatch, getState) => {
+    return (dispatch, getState) => {
+        dispatch(setCharactersFetching(true))
+
         const state = getState()
         const oldList = state.characters.list
         const newList = [...newCharacter, ...oldList]
 
         dispatch(updateCharactersList(newList, state.characters.total))
-        Actions.pop()
+        setTimeout( () => {
+            dispatch(setCharactersFetching(false))
+            Actions.pop()
+        }, 1000 )
     }
 }
 

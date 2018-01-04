@@ -73,6 +73,8 @@ class CharacterDetail extends Component {
                         labelStyle={styles.textButton}
                         label={'Borrar'}
                         onPress={ () => this.onDelete(id) }
+                        isFetching={this.props.isFetching}
+                        spinnerColor={Colors.darkBackground}
                     />
                 </View>
                 <SectionList
@@ -94,6 +96,7 @@ class CharacterDetail extends Component {
 const mapStateToProps = (state) => {
     return {
         character: state.characters.item,
+        isFetching: state.characters.isFetching,
     }
 }
 
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
     },
 
     imageContainer: {
-        backgroundColor: Colors.colorTerciario,
+        backgroundColor: Colors.lightBackground,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
         margin: 20,
         borderWidth: 1,
         borderRadius: 6,
-        backgroundColor: Colors.colorTerciarioTransparente,
+        backgroundColor: Colors.transparentButton,
     },
 
     textButton: {
