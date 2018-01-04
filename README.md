@@ -34,6 +34,7 @@ especificar en el Read.me del repositorio.
 ## Solución
 
 Notas adicionales:
+- La rama master del repositorio es la rama principal
 - Se utiliza redux
 - Se utiliza react-native-router-flux
 - Se utiliza el módulo 'qs' para concatenar los filtros al configurar la llamada al endpoint en 'AsyncCalls'
