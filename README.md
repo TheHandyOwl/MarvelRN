@@ -43,6 +43,7 @@ Notas adicionales:
 - Se hace uso de la paginación en la vista principal, de 20 en 20, con scroll infinito hasta agotar la lista de personajes. Se activa / desactiva un spinner durante cada descarga
 - Al pulsar sobre un personaje de la vista principal, se muestra la vista detalle
 - En la vista detalle hay un SectionList, que muestra 'comics', 'series' y 'stories'
+- La vista detalle se ha preparado para mostrar un mensaje al pulsar sobre los items del Section List, pero se deshabilita porque va lento en el simulador
 - Desde la vista detalle se puede borrar el personaje, utilizando un filter para generar la lista nueva
 - Se pueden añadir nuevos personajes mediante un formulario, que se accede desde un menú en la vista principal.
 - Si añadimos un personaje nuevo, se guardará el primero de la lista para que se vea. Obliga a meter una foto (que es fija porque no podremos subirla a la API) y un nombre para hacer validaciones en el formulario.
