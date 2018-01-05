@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Actions, Router, Scene } from 'react-native-router-flux'
 
 // My modules
@@ -47,6 +47,29 @@ export default class App extends Component {
     )
   }
 
+  renderMoreInfoButton(item) {
+    const detailUrl = item && item.urls
+      .filter( url => url.type == "detail" )
+      .map(item => item.url)[0] ?
+        item.urls
+        .filter( url => url.type == "detail" )
+        .map(item => item.url)[0]
+        .toString()
+        .replace("http:","https:")
+      : null
+
+     return ( detailUrl ?
+        <TouchableOpacity style={styles.addButton}>
+          <Text
+            style={styles.addButtonText}
+            onPress={ () => Linking.openURL(detailUrl) }>
+            {'More info'}
+          </Text>
+        </TouchableOpacity>
+        : null
+      )
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -68,6 +91,7 @@ export default class App extends Component {
               title={ 'Character Detail' }
               navigationBarStyle={ styles.navBar }
               navBarButtonColor={ Colors.navBarText }
+              renderRightButton={ () => this.renderMoreInfoButton(store.getState().characters.item) }
             />
             <Scene
               //initial
