@@ -48,14 +48,12 @@ export default class App extends Component {
   }
 
   renderMoreInfoButton(item) {
-    const detailUrl = item && item.urls
-      .filter( url => url.type == "detail" )
-      .map(item => item.url)[0] ?
+    const detailUrl = item && item.urls ?
         item.urls
-        .filter( url => url.type == "detail" )
-        .map(item => item.url)[0]
-        .toString()
-        .replace("http:","https:")
+          .filter( url => url.type == "detail" )
+          .map(item => item.url)[0]
+          .toString()
+          .replace("http:","https:")
       : null
 
      return ( detailUrl ?
