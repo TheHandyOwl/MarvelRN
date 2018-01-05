@@ -49,3 +49,4 @@ Notas adicionales:
 - En el formulario se utiliza un label/input personalizado
 - Los botones de 'Guardar' y 'Borrar' se hacen con un botones personalizados
 - Se activa un 'ActivityIndicator' nativo al pulsar sobre los botones personalizados 'Guardar' y 'Borrar'. Se mostrará durante 1 segundo como respuesta al usuario para informar de una supuesta acción en segundo plano.
+- Se activa un menú para obtener más información en la vista detalle, que abrirá un navegador con la información del personaje que estemos visualizando
